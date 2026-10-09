@@ -936,9 +936,9 @@ const TRAVEL_TXT = ['Una misión, seis sellos y un pergamino que es tuyo. vamos.'
 
 /* ================= diálogos ================= */
 const WHO = { Kiro: '#6a4fc9', Narrador: '#5a6488', Anciana: '#e8553d', Pipo: '#2f9e63', Guardián: '#d1477a' };
-const VOICE_P = { Kiro: 380, Narrador: 300, Anciana: 335, Pipo: 540, Niurka: 470 };
+const VOICE_P = { Kiro: 380, Narrador: 300, Anciana: 335, Pipo: 540, Guardián: 470 };
 /* nota al pie del pergamino final. EDITAR AQUI si el texto sellado ya dice algo parecido */
-function NOTE_NIURKA(){
+function NOTE_GUARDIAN(){
   return 'yo te veo siempre mi vida, aunque tu no lo veas. eso no lo tienes que demostrarme. vamos a seguir nuestro camino ninja, te amo mas que al universo universal... bueno, al multiverso multiversal jsjs';
 }
 let dlgLines = [], dlgClock = 0;
@@ -1351,7 +1351,7 @@ scenes.push({
       this.heartT = (this.heartT || 0) - dt; if (this.heartT <= 0){ this.heartT = .35; addFx('heart', 40 + Math.random() * 400, 580, { vy: -90 - Math.random() * 50, life: 3, s: .8 + Math.random() * .6, color: Math.random() < .5 ? '#ff5c7a' : '#ffb3c1' }); }
       M.y = hopY(t, this.tOpen + 1.9, 90, .76);
       this.drawBig(to);
-      scenes[5].dur = this.tOpen + 10 + ((this.msg || '').length + (typeof NOTE_NIURKA === 'function' ? NOTE_NIURKA().length : 0) + 30) / 24;
+      scenes[5].dur = this.tOpen + 10 + ((this.msg || '').length + (typeof NOTE_GUARDIAN === 'function' ? NOTE_GUARDIAN().length : 0) + 30) / 24;
     }
     if (t > 9 && this.st === 'locked'){ P.nS += 0; }
     K.P = jumpStep(dt, P);
@@ -1364,7 +1364,7 @@ scenes.push({
     let txt = '', i = 0;
     if (e > .85) lines.forEach(ln => { const take = clamp(left, 0, ln.length); txt += `<text x="0" y="${(-120 + i * 30).toFixed(0)}" font-size="24" font-weight="800" fill="#4a2e17" text-anchor="middle" font-family="Georgia,'Times New Roman',serif">${esc(ln.slice(0, take))}</text>`; left -= ln.length + 1; i++; });
     /* nota personal de Niurka, al pie del texto sellado */
-    const niu = typeof NOTE_NIURKA === 'function' ? NOTE_NIURKA() : '', mLen = (this.msg || '').length;
+    const niu = typeof NOTE_GUARDIAN === 'function' ? NOTE_GUARDIAN() : '', mLen = (this.msg || '').length;
     let nota = '', nleft = clamp(typed - mLen - 6, 0, 400);
     if (e > .92) wrapTxt(niu, 44).slice(0, 5).forEach((ln, k) => { const take = clamp(nleft, 0, ln.length); nota += `<text x="0" y="${(116 + k * 17.5).toFixed(1)}" font-size="13.5" font-weight="700" fill="#8a4a2e" text-anchor="middle" font-family="${FONT}">${esc(ln.slice(0, take))}</text>`; nleft -= ln.length + 1; });
     g.innerHTML = `<rect width="480" height="640" fill="#0e1224" opacity="${(.62 * e).toFixed(2)}"/>
